@@ -42,31 +42,31 @@ function WorldClock({ member }: { member: TeamMember }) {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "online": return "bg-green-400";
+      case "online": return "bg-accent-500";
       case "away": return "bg-yellow-400";
       default: return "bg-gray-400";
     }
   };
 
   return (
-    <div className="flex items-center justify-between p-4 bg-white rounded-lg border">
-      <div className="flex items-center space-x-3">
+    <div className="flex items-center justify-between p-5 bg-surface rounded-2xl border border-border hover:shadow-medium transition-all">
+      <div className="flex items-center space-x-4">
         <div className="relative">
-          <div className="h-10 w-10 bg-gray-200 rounded-full flex items-center justify-center">
-            <span className="text-sm font-semibold text-gray-600">
+          <div className="h-12 w-12 bg-primary-100 rounded-full flex items-center justify-center">
+            <span className="text-sm font-semibold text-primary-700">
               {member.name.split(" ").map(n => n[0]).join("")}
             </span>
           </div>
-          <div className={`absolute -bottom-1 -right-1 h-3 w-3 rounded-full border-2 border-white ${getStatusColor(member.status)}`}></div>
+          <div className={`absolute -bottom-1 -right-1 h-4 w-4 rounded-full border-2 border-white ${getStatusColor(member.status)}`}></div>
         </div>
         <div>
-          <p className="font-medium text-gray-900">{member.name}</p>
-          <p className="text-sm text-gray-500">{member.timezone.replace("_", " ")}</p>
+          <p className="font-semibold text-text-primary">{member.name}</p>
+          <p className="text-sm text-text-secondary">{member.timezone.replace("_", " ")}</p>
         </div>
       </div>
       <div className="text-right">
-        <p className="font-mono text-lg font-semibold text-gray-900">{time}</p>
-        <p className="text-sm text-gray-500 capitalize">{member.status}</p>
+        <p className="font-mono text-xl font-bold text-text-primary">{time}</p>
+        <p className="text-sm text-text-tertiary capitalize">{member.status}</p>
       </div>
     </div>
   );
@@ -84,28 +84,28 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-surface-secondary">
       {/* Navigation */}
-      <nav className="bg-white shadow-sm border-b">
+      <nav className="bg-white/80 backdrop-blur-md border-b border-border-light shadow-soft">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              <Link href="/" className="flex items-center space-x-2">
-                <div className="h-8 w-8 rounded-lg bg-blue-600 flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">Z</span>
+              <Link href="/" className="flex items-center space-x-3">
+                <div className="h-10 w-10 gradient-primary rounded-xl flex items-center justify-center shadow-medium">
+                  <span className="text-white font-bold text-lg">Z</span>
                 </div>
-                <span className="text-xl font-bold text-gray-900">ZoneAlign</span>
+                <span className="text-2xl font-bold text-text-primary">ZoneAlign</span>
               </Link>
             </div>
             
             <div className="flex items-center space-x-4">
-              <button className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-lg hover:bg-gray-100">
+              <button className="text-text-secondary hover:text-text-primary px-4 py-2 rounded-xl hover:bg-surface-secondary transition-all">
                 Teams
               </button>
-              <button className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-lg hover:bg-gray-100">
+              <button className="text-text-secondary hover:text-text-primary px-4 py-2 rounded-xl hover:bg-surface-secondary transition-all">
                 Meetings
               </button>
-              <button className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-lg hover:bg-gray-100">
+              <button className="text-text-secondary hover:text-text-primary px-4 py-2 rounded-xl hover:bg-surface-secondary transition-all">
                 Analytics
               </button>
               <UserButton />
@@ -117,23 +117,29 @@ export default function DashboardPage() {
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-6 py-8">
         {/* Welcome Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">
+        <div className="mb-8 animate-slide-up">
+          <div className="inline-flex items-center px-4 py-2 bg-accent-100 text-accent-700 rounded-full text-sm font-medium mb-4">
+            🌍 Global Team Dashboard
+          </div>
+          <h1 className="text-4xl font-bold text-text-primary">
             Welcome back, {user.firstName}!
           </h1>
-          <p className="mt-2 text-gray-600">
-            Here's an overview of your team's current status across time zones.
+          <p className="mt-3 text-xl text-text-secondary">
+            Here's your team's live status and intelligent scheduling insights.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Team World Clock */}
           <div className="lg:col-span-2">
-            <div className="bg-white rounded-lg shadow-sm p-6">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-semibold text-gray-900">Team World Clock</h2>
-                <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-sm">
-                  Schedule Meeting
+            <div className="bg-white rounded-2xl shadow-large p-8 animate-fade-in">
+              <div className="flex items-center justify-between mb-8">
+                <div>
+                  <h2 className="text-2xl font-semibold text-text-primary">Live Team Status</h2>
+                  <p className="text-text-secondary mt-1">Real-time timezone coordination</p>
+                </div>
+                <button className="gradient-primary text-white px-6 py-3 rounded-xl hover:shadow-medium transition-all transform hover:scale-105 font-semibold">
+                  🚀 Schedule Meeting
                 </button>
               </div>
               
@@ -141,6 +147,18 @@ export default function DashboardPage() {
                 {mockTeamMembers.map(member => (
                   <WorldClock key={member.id} member={member} />
                 ))}
+              </div>
+              
+              <div className="mt-8 p-6 bg-primary-50 rounded-2xl">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="font-semibold text-primary-900 mb-1">💡 Smart Insight</h3>
+                    <p className="text-primary-800">Best meeting window: 2:00-3:00 PM UTC with 80% team availability</p>
+                  </div>
+                  <button className="text-primary-700 hover:text-primary-900 font-medium">
+                    View Details →
+                  </button>
+                </div>
               </div>
             </div>
           </div>
